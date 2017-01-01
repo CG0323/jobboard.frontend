@@ -1,0 +1,5 @@
+<p-dataTable [value]="skills" [paginator]="true" [lazy]="true" [rows]="pageSize" [totalRecords]="totalItems" (onLazyLoad)="loadSkillsLazy($event)">
+    <header>List of Target skills</header>
+    <p-column field="name" header="Skill Name"></p-column>
+    <p-column field="keyWords" header="Key Words"></p-column>
+</p-dataTable>

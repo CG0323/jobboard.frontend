@@ -17,6 +17,7 @@ def push():
 def update_server():
     with cd("/home/cg/jobboard.frontend"):
        run('git pull') 
+       run('cnpm install')
        run('ng build -prod')
        run('systemctl restart nginx')
 	
