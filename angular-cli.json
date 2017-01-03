@@ -21,7 +21,7 @@
         ],
         "scripts": [
             "../node_modules/lodash/lodash.js",
-            "../node_modules/rxjs/rx.js",
+            "../node_modules/rxjs/Rx.js",
             "../node_modules/chart.js/dist/Chart.bundle.min"
         ],
         "environments": {
