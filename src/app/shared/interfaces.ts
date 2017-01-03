@@ -12,11 +12,11 @@ export interface Predicate<T> {
 }
 
 export interface ISkill {
-    id: number;
-    name: string;
-    keyWords: string;
-    isReg: boolean;
-    isDirty: boolean;
+    id?: number;
+    name?: string;
+    keyWords?: string;
+    isReg?: boolean;
+    temperature?: number;
 }
 
 export interface IJob {
@@ -28,5 +28,5 @@ export interface IJob {
     city: string;
     url: string;
     analyzed:boolean;
-
+    skills: number[];
 }

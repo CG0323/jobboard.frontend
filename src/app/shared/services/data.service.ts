@@ -22,7 +22,7 @@ export class DataService {
         this._baseUrl = configService.getApiURI();
     }
 
-getSkills(offset?: number, itemsPerPage?: number): Observable<PaginatedResult<ISkill[]>> {
+   getSkills(offset?: number, itemsPerPage?: number): Observable<PaginatedResult<ISkill[]>> {
         var peginatedResult: PaginatedResult<ISkill[]> = new PaginatedResult<ISkill[]>();
  
         let headers = new Headers();
@@ -39,7 +39,6 @@ getSkills(offset?: number, itemsPerPage?: number): Observable<PaginatedResult<IS
                 if (res.headers.get("Pagination") != null) {
                     //var pagination = JSON.parse(res.headers.get("Pagination"));
                     var paginationHeader: Pagination = this.itemsService.getSerialized<Pagination>(JSON.parse(res.headers.get("Pagination")));
-                    console.log(paginationHeader);
                     peginatedResult.pagination = paginationHeader;
                 }
                 return peginatedResult;
@@ -47,7 +46,15 @@ getSkills(offset?: number, itemsPerPage?: number): Observable<PaginatedResult<IS
             .catch(this.handleError);
     }
 
-getJobs(offset?: number, itemsPerPage?: number): Observable<PaginatedResult<IJob[]>> {
+    getTop10Skills(): Observable<ISkill[]> {
+        return this.http.get(this._baseUrl + 'skills/top10')
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch(this.handleError);
+    }
+
+    getJobs(offset?: number, itemsPerPage?: number): Observable<PaginatedResult<IJob[]>> {
         var paginatedResult: PaginatedResult<IJob[]> = new PaginatedResult<IJob[]>();
  
         let headers = new Headers();
@@ -71,7 +78,43 @@ getJobs(offset?: number, itemsPerPage?: number): Observable<PaginatedResult<IJob
             .catch(this.handleError);
     }
 
-handleError(error: any) {
+    updateSkill(skill: ISkill): Observable<number> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.put(this._baseUrl + 'skills/' + skill.id, JSON.stringify(skill), {
+            headers: headers
+        })
+            .map((res: Response) => {
+                return res.status;
+            })
+            .catch(this.handleError);
+    }
+
+    addSkill(skill: ISkill): Observable<ISkill> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this._baseUrl + 'skills', JSON.stringify(skill), {
+            headers: headers
+        })
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch(this.handleError);
+    }
+
+    deleteSkill(skill: ISkill): Observable<number> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.delete(this._baseUrl + 'skills/' + skill.id, {
+            headers: headers
+        })
+            .map((res: Response) => {
+                return res.status;
+            })
+            .catch(this.handleError);
+    }
+
+    handleError(error: any) {
         var applicationError = error.headers.get('Application-Error');
         var serverError = error.json();
         var modelStateErrors: string = '';

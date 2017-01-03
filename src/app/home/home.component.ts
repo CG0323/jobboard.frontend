@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IJob, PaginatedResult} from '../shared/interfaces';
+import { IJob,ISkill, PaginatedResult} from '../shared/interfaces';
 import { DataService } from '../shared/services/data.service';
 import { LazyLoadEvent} from 'primeng/primeng';
 
@@ -8,6 +8,8 @@ import { LazyLoadEvent} from 'primeng/primeng';
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
+  selectedSkills: string[] = [];
+  skills: ISkill[];
   jobs: IJob[];
   totalItems : number;
   pageSize : number;
@@ -16,6 +18,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.pageSize = 15;
     this.loadJobs(0, this.pageSize);
+    this.loadSkills(0,10000);
   }
   
   loadJobs(offset: number, pageSize: number) {
@@ -30,6 +33,17 @@ export class HomeComponent implements OnInit {
             });
     }
 
+  loadSkills(offset: number, pageSize: number) {
+        this.dataService.getSkills(offset, pageSize)
+            .subscribe((res: PaginatedResult<ISkill[]>) => {
+                this.skills = res.result;
+                this.totalItems = res.pagination.TotalItems;
+            },
+            error => {
+                //this.loadingBarService.complete();
+                // this.notificationService.printErrorMessage('Failed to load schedules. ' + error);
+            });
+    }
     loadJobsLazy(event: LazyLoadEvent) {
         //in a real application, make a remote request to load data using state metadata from event
         //event.first = First row offset
@@ -72,5 +86,20 @@ export class HomeComponent implements OnInit {
         return this.jobs[i].title;
     }
 
+    hasSkill(i:number, skillId:number){
+        var magic:number = 15;
+        i = i % magic
+        if(this.jobs.length <= i){
+            return false;
+        }
+        var job:IJob = this.jobs[i];
+        var index = job.skills.indexOf(skillId)
+        if(index >= 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
 }
