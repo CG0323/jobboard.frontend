@@ -13,6 +13,8 @@ export class HomeComponent implements OnInit {
   jobs: IJob[];
   totalItems : number;
   pageSize : number;
+  detail: string;
+  displayDialog: boolean;
   constructor(private dataService : DataService) {}
 
   ngOnInit() {
@@ -101,5 +103,25 @@ export class HomeComponent implements OnInit {
             return false;
         }
     }
+
+    showDetail(i: number) {
+        var magic:number = 15;
+        i = i % magic;
+
+        this.dataService.getJobWithContent(i)
+            .subscribe((res: IJob) => {
+                this.detail = res.content;
+                this.displayDialog = true;
+            },
+            error => {
+                //this.loadingBarService.complete();
+                // this.notificationService.printErrorMessage('Failed to load schedules. ' + error);
+            });
+    }
+
+    close() {
+        this.detail = null;
+        this.displayDialog = false;
+    }    
 
 }

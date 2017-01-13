@@ -10,7 +10,6 @@
     <p-column [style]="{'width':'420px'}" field="title" header="Job Title">
         <template let-job="rowData" let-i="rowIndex" pTemplate="body">
         <a target="_blank" href={{getUrl(i)}}>{{getTitle(i)}}</a>
-        <!--<a target="_blank" href={ {job.url}}>{{job.title}}</a>-->
         </template>
     </p-column>
     <!--<p-column [style]="{'width':'260px'}" field="employer" header="Employer"></p-column>
@@ -21,8 +20,24 @@
             <i *ngIf="hasSkill(i,skill.id)" class="fa fa-check" aria-hidden="true"></i>
         </template>
     </p-column>
+
+    <p-column styleClass="col-button" header="Detail">
+        <template let-job="rowData" let-i="rowIndex" pTemplate="body">
+            <button type="button" pButton (click)="showDetail(i)" icon="fa-info"></button>
+        </template>
+    </p-column>
+
 </p-dataTable>
 
+<p-dialog header="Job Detail" [(visible)]="displayDialog" width="1400" showEffect="fade" [modal]="true">
+    <pre>{{detail}} </pre>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="close()" label="Close"></button>
+        </div>
+    </footer>
+</p-dialog>
+
 <div>
-    <p-checkbox *ngFor="let skill of skills" name="skill-delection" [value]="skill" [label]="skill.name" [(ngModel)]="selectedSkills"></p-checkbox>
+    <p-checkbox *ngFor="let skill of skills" name="skill-detection" [value]="skill" [label]="skill.name" [(ngModel)]="selectedSkills"></p-checkbox>
 </div>

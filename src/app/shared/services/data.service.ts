@@ -54,6 +54,18 @@ export class DataService {
             .catch(this.handleError);
     }
 
+    getJobWithContent(id: number): Observable<IJob>{
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.get(this._baseUrl + 'jobs/' + id, {
+            headers: headers
+        })
+            .map((res: Response) => {
+                return res.json();
+            })
+            .catch(this.handleError);
+    }
+
     getJobs(offset?: number, itemsPerPage?: number): Observable<PaginatedResult<IJob[]>> {
         var paginatedResult: PaginatedResult<IJob[]> = new PaginatedResult<IJob[]>();
  
