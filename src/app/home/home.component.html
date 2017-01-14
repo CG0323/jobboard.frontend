@@ -1,6 +1,11 @@
 <!--<p-dataTable [value]="jobs" [rows]="pageSize" [totalRecords]="totalItems">-->
 <p-dataTable [value]="jobs" [paginator]="true" [lazy]="true" [rows]="pageSize" [totalRecords]="totalItems" (onLazyLoad)="loadJobsLazy($event)">
     <header>List of Jobs</header>
+    <p-column [style]="{'width':'30px'}" styleClass="col-button" header="Detail">
+        <template let-job="rowData" let-i="rowIndex" pTemplate="body">
+            <button type="button" pButton (click)="showDetail(i)" icon="fa-info"></button>
+        </template>
+    </p-column>
     <p-column [style]="{'width':'90px'}" field="postAt" header="Post At">
         <template let-job="rowData" let-i="rowIndex" pTemplate="body">
             <span>{{getPostDate(i)}}</span>
@@ -21,11 +26,7 @@
         </template>
     </p-column>
 
-    <p-column styleClass="col-button" header="Detail">
-        <template let-job="rowData" let-i="rowIndex" pTemplate="body">
-            <button type="button" pButton (click)="showDetail(i)" icon="fa-info"></button>
-        </template>
-    </p-column>
+
 
 </p-dataTable>
 
