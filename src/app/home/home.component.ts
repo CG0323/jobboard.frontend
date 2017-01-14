@@ -88,21 +88,21 @@ export class HomeComponent implements OnInit {
         return this.jobs[i].title;
     }
 
-    hasSkill(i:number, skillId:number){
+    getRequriedSkillLevel(i:number, skillId:number){
         var magic:number = 15;
         i = i % magic
         if(this.jobs.length <= i){
-            return false;
+            return 0;
         }
         var job:IJob = this.jobs[i];
-        var index = job.skills.indexOf(skillId)
-        if(index >= 0){
-            return true;
+        for(var j = 0; j < job.skills.length; j++){
+            if(job.skills[j].skillId == skillId){
+                return job.skills[j].level;
+            }
         }
-        else{
-            return false;
-        }
+        return 0;
     }
+
 
     showDetail(i: number) {
         var magic:number = 15;

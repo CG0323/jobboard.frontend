@@ -19,6 +19,11 @@ export interface ISkill {
     temperature?: number;
 }
 
+export interface IJobSkill {
+    skillId:number;
+    level:number;
+}
+
 export interface IJob {
     id: number;
     postAt: Date;
@@ -28,6 +33,6 @@ export interface IJob {
     city: string;
     url: string;
     analyzed:boolean;
-    skills: number[];
+    skills: IJobSkill[];
     content: string;
 }

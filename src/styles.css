@@ -8,6 +8,10 @@ body {
     margin-top: 50px;
 }
 
+.skill-stars {
+    text-align: center;
+}
+
 @media (min-width: 1400px) {
     .container {
         width: 90%;
