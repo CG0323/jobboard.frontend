@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import {Ng2Webstorage} from 'ng2-webstorage';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -13,6 +14,7 @@ import { DataService } from './shared/services/data.service';
 import { ConfigService } from './shared/utils/config.service';
 import { ItemsService } from './shared/utils/items.service';
 import { InsightComponent } from './insight/insight.component';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { InsightComponent } from './insight/insight.component';
     DialogModule,
     GrowlModule,
     ButtonModule,
-    ChartModule
+    ChartModule,
+    Ng2Webstorage,
   ],
   providers: [
     ConfigService,

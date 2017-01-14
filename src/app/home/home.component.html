@@ -45,5 +45,5 @@
 </p-dialog>
 
 <div>
-    <p-checkbox *ngFor="let skill of skills" name="skill-detection" [value]="skill" [label]="skill.name" [(ngModel)]="selectedSkills"></p-checkbox>
+    <p-checkbox *ngFor="let skill of skills" name="skill-detection" [value]="skill" [label]="skill.name" [(ngModel)]="selectedSkills" (onChange)="saveSetting()"></p-checkbox>
 </div>

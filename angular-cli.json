@@ -22,7 +22,7 @@
         "scripts": [
             "../node_modules/lodash/lodash.js",
             "../node_modules/rxjs/Rx.js",
-            "../node_modules/chart.js/dist/Chart.bundle.min"
+            "../node_modules/chart.js/dist/Chart.bundle.min.js"
         ],
         "environments": {
             "source": "environments/environment.ts",

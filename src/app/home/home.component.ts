@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IJob, ISkill, PaginatedResult} from '../shared/interfaces';
 import { DataService } from '../shared/services/data.service';
-import { LazyLoadEvent} from 'primeng/primeng';
+import { LazyLoadEvent } from 'primeng/primeng';
+import { LocalStorageService } from 'ng2-webstorage';
 
 @Component({
   selector: 'app-home',
@@ -15,9 +16,10 @@ export class HomeComponent implements OnInit {
   pageSize : number;
   job: IJob;
   displayDialog: boolean;
-  constructor(private dataService : DataService) {}
+  constructor(private dataService : DataService, private storage:LocalStorageService) {}
 
   ngOnInit() {
+    this.retrieveSetting();
     this.pageSize = 15;
     this.loadJobs(0, this.pageSize);
     this.loadSkills(0,10000);
@@ -46,7 +48,8 @@ export class HomeComponent implements OnInit {
                 // this.notificationService.printErrorMessage('Failed to load schedules. ' + error);
             });
     }
-    loadJobsLazy(event: LazyLoadEvent) {
+
+ loadJobsLazy(event: LazyLoadEvent) {
         //in a real application, make a remote request to load data using state metadata from event
         //event.first = First row offset
         //event.rows = Number of rows per page
@@ -123,5 +126,16 @@ export class HomeComponent implements OnInit {
         this.job = null;
         this.displayDialog = false;
     }    
+
+    saveSetting(){
+         this.storage.store('selectedSkills', this.selectedSkills);
+    }
+
+    retrieveSetting() {
+        var storedSelection = this.storage.retrieve('selectedSkills');
+        if(storedSelection){
+            this.selectedSkills = storedSelection;
+        }
+    }
 
 }
