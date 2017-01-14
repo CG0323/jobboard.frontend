@@ -29,8 +29,9 @@
 
 </p-dataTable>
 
-<p-dialog header="Job Detail" [(visible)]="displayDialog" width="1400" showEffect="fade" [modal]="true">
-    <pre>{{detail}} </pre>
+<p-dialog [(visible)]="displayDialog" width="1400" height="800" [responsive]="true" showEffect="fade" [modal]="true">
+    <header *ngIf="job"> {{job.id}} </header>
+    <pre *ngIf="job" style="word-wrap: break-word; white-space: pre-wrap; white-space: -moz-pre-wrap"> {{job.content}} </pre>
     <footer>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
             <button type="button" pButton icon="fa-close" (click)="close()" label="Close"></button>

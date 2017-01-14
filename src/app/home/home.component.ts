@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IJob,ISkill, PaginatedResult} from '../shared/interfaces';
+import { IJob, ISkill, PaginatedResult} from '../shared/interfaces';
 import { DataService } from '../shared/services/data.service';
 import { LazyLoadEvent} from 'primeng/primeng';
 
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   jobs: IJob[];
   totalItems : number;
   pageSize : number;
-  detail: string;
+  job: IJob;
   displayDialog: boolean;
   constructor(private dataService : DataService) {}
 
@@ -107,10 +107,10 @@ export class HomeComponent implements OnInit {
     showDetail(i: number) {
         var magic:number = 15;
         i = i % magic;
-
-        this.dataService.getJobWithContent(i)
+        var id = this.jobs[i].id;
+        this.dataService.getJobWithContent(id)
             .subscribe((res: IJob) => {
-                this.detail = res.content;
+                this.job = res;
                 this.displayDialog = true;
             },
             error => {
@@ -120,7 +120,7 @@ export class HomeComponent implements OnInit {
     }
 
     close() {
-        this.detail = null;
+        this.job = null;
         this.displayDialog = false;
     }    
 

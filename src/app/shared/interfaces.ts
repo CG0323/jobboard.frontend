@@ -29,4 +29,5 @@ export interface IJob {
     url: string;
     analyzed:boolean;
     skills: number[];
+    content: string;
 }
