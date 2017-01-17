@@ -1,0 +1,49 @@
+<!--<p-dataTable [value]="jobs" [rows]="pageSize" [totalRecords]="totalItems">-->
+<p-dataTable [value]="jobs" [paginator]="true" [lazy]="true" [rows]="pageSize" [totalRecords]="totalItems" (onLazyLoad)="loadJobsLazy($event)">
+    <header>List of Jobs</header>
+    <!--<p-column [style]="{'width':'30px'}" styleClass="col-button" header="Detail">
+        <template let-job="rowData" let-i="rowIndex" pTemplate="body">
+            <button type="button" pButton (click)="showDetail(i)" icon="fa-info"></button>
+        </template>
+    </p-column>-->
+    <p-column [style]="{'width':'90px'}" field="postAt" header="Post At">
+        <template let-job="rowData" let-i="rowIndex" pTemplate="body">
+            <span>{{getPostDate(i)}}</span>
+            <!--<span>{{job.postAt}}</span>-->
+        </template>
+    </p-column>
+    <p-column [style]="{'width':'420px'}" field="title" header="Job Title">
+        <template let-job="rowData" let-i="rowIndex" pTemplate="body">
+        <a target="_blank" href={{getUrl(i)}}>{{getTitle(i)}}</a>
+        </template>
+    </p-column>
+    <!--<p-column [style]="{'width':'260px'}" field="employer" header="Employer"></p-column>-->
+    <p-column [style]="{'width':'150px'}" field="province" header="Province"></p-column>
+    <!--<p-column [style]="{'width':'180px'}" field="city" header="City"></p-column>-->
+    <p-column styleClass="skill-stars" *ngFor="let skill of selectedSkills" [header]="skill.name">
+        <template let-job="rowData" let-i="rowIndex" pTemplate="body">
+            <span>  
+                <i *ngIf="getRequriedSkillLevel(i,skill.id) == 1" class="fa fa-star-half-o" aria-hidden="true"></i>
+                <i *ngIf="getRequriedSkillLevel(i,skill.id) > 1" class="fa fa-star" aria-hidden="true"></i>
+                <i *ngIf="getRequriedSkillLevel(i,skill.id) > 2" class="fa fa-star" aria-hidden="true"></i>
+            </span>
+        </template>
+    </p-column>
+
+
+
+</p-dataTable>
+
+<p-dialog [(visible)]="displayDialog" width="1400" height="800" [responsive]="true" showEffect="fade" [modal]="true">
+    <header *ngIf="job"> {{job.id}} </header>
+    <pre *ngIf="job" style="word-wrap: break-word; white-space: pre-wrap; white-space: -moz-pre-wrap"> {{job.content}} </pre>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="close()" label="Close"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+<div>
+    <p-checkbox *ngFor="let skill of skills" name="skill-detection" [value]="skill" [label]="skill.name" [(ngModel)]="selectedSkills" (onChange)="saveSetting()"></p-checkbox>
+</div>

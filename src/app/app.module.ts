@@ -3,10 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {Ng2Webstorage} from 'ng2-webstorage';
+import { Ng2Webstorage} from 'ng2-webstorage';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { JobComponent } from './job/job.component';
 import { routing } from './app.routes';
 import { SkillComponent } from './skill/skill.component';
 import { ButtonModule,DataTableModule,GrowlModule,DialogModule,CheckboxModule,SharedModule,ChartModule } from 'primeng/primeng';
@@ -20,6 +21,7 @@ import { InsightComponent } from './insight/insight.component';
   declarations: [
     AppComponent,
     HomeComponent,
+    JobComponent,
     SkillComponent,
     InsightComponent
   ],

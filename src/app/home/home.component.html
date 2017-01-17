@@ -1,49 +1,39 @@
-<!--<p-dataTable [value]="jobs" [rows]="pageSize" [totalRecords]="totalItems">-->
-<p-dataTable [value]="jobs" [paginator]="true" [lazy]="true" [rows]="pageSize" [totalRecords]="totalItems" (onLazyLoad)="loadJobsLazy($event)">
-    <header>List of Jobs</header>
-    <p-column [style]="{'width':'30px'}" styleClass="col-button" header="Detail">
-        <template let-job="rowData" let-i="rowIndex" pTemplate="body">
-            <button type="button" pButton (click)="showDetail(i)" icon="fa-info"></button>
-        </template>
-    </p-column>
-    <p-column [style]="{'width':'90px'}" field="postAt" header="Post At">
-        <template let-job="rowData" let-i="rowIndex" pTemplate="body">
-            <span>{{getPostDate(i)}}</span>
-            <!--<span>{{job.postAt}}</span>-->
-        </template>
-    </p-column>
-    <p-column [style]="{'width':'420px'}" field="title" header="Job Title">
-        <template let-job="rowData" let-i="rowIndex" pTemplate="body">
-        <a target="_blank" href={{getUrl(i)}}>{{getTitle(i)}}</a>
-        </template>
-    </p-column>
-    <!--<p-column [style]="{'width':'260px'}" field="employer" header="Employer"></p-column>
-    <p-column [style]="{'width':'150px'}" field="province" header="Province"></p-column>
-    <p-column [style]="{'width':'180px'}" field="city" header="City"></p-column>-->
-    <p-column styleClass="skill-stars" *ngFor="let skill of selectedSkills" [header]="skill.name">
-        <template let-job="rowData" let-i="rowIndex" pTemplate="body">
-            <span>  
-                <i *ngIf="getRequriedSkillLevel(i,skill.id) == 1" class="fa fa-star-half-o" aria-hidden="true"></i>
-                <i *ngIf="getRequriedSkillLevel(i,skill.id) > 1" class="fa fa-star" aria-hidden="true"></i>
-                <i *ngIf="getRequriedSkillLevel(i,skill.id) > 2" class="fa fa-star" aria-hidden="true"></i>
-            </span>
-        </template>
-    </p-column>
+<div class="jumbotron">
+    <div class="container">
+        <h1>Job Board</h1>
+        <p>This is a hobby project for practicing ASP.Net Core(on Linux) + Angular2 + Python. It automatically retrieves job opportunities from several websites, analyze the requirement description, extract required competencies and level of experience,
+            display in a "car comparison" way.</p>
+        <p><a class="btn btn-primary btn-lg" href="https://github.com/CG0323/jobboard" role="button">Github &raquo;</a></p>
+    </div>
+</div>
 
-
-
-</p-dataTable>
-
-<p-dialog [(visible)]="displayDialog" width="1400" height="800" [responsive]="true" showEffect="fade" [modal]="true">
-    <header *ngIf="job"> {{job.id}} </header>
-    <pre *ngIf="job" style="word-wrap: break-word; white-space: pre-wrap; white-space: -moz-pre-wrap"> {{job.content}} </pre>
-    <footer>
-        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <button type="button" pButton icon="fa-close" (click)="close()" label="Close"></button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <h2>jobboard.scraper</h2>
+            <p>A python scraper deployed on AWS EC2 (Linux). It regurlarly fetch recruiting information (using key words 'software developer') from several Canadien recruitment website, such as Monster.ca, Neuvoo.ca, Workopolis.ca It then sends the raw information
+                to jobboard.backend. </p>
         </div>
-    </footer>
-</p-dialog>
+        <div class="col-md-3">
+            <h2>jobboard.backend</h2>
+            <p>A RESTful data service built with ASP.NET Core + EntityFramework Core + MySql, deployed on AliCloud CentOs 7 instance. It serve as the data persistance service for jobboard.scraper and the backend for jobboard.frontend. </p>
+        </div>
+        <div class="col-md-3">
+            <h2>jobboard.frontend</h2>
+            <p>Angular2 single page application, deployed on Nginx. Users can view the latest job opportunities in a "Car Comparison" way, quickly view the required competencies before openning the detailed job page. Skill columns are customizable. Users
+                can also add/edit skill detecting rules. Some statistic features are also available.</p>
+        </div>
+        <div class="col-md-3">
+            <h2>jobboard.analyzer</h2>
+            <p>A python flask lighweight web service. It acts as a background worker which analyzes the raw recruitment description, analyze required skills as well as the level of skills.Everytime a new recruiting post is sent to the backend, the analyze
+                service will be triggered to process the text, extract desired information from unstructured text and save the result into MySql data tables.</p>
+        </div>
+        <img class="aligncenter" src="assets/img/system-design.png">
+    </div>
 
-<div>
-    <p-checkbox *ngFor="let skill of skills" name="skill-detection" [value]="skill" [label]="skill.name" [(ngModel)]="selectedSkills" (onChange)="saveSetting()"></p-checkbox>
+    <hr>
+
+    <footer>
+        <p>&copy; CG 2017</p>
+    </footer>
 </div>

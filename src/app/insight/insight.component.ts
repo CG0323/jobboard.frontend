@@ -20,7 +20,7 @@ export class InsightComponent implements OnInit {
     this.options = {
             title: {
                 display: true,
-                text: 'Top 10 Skills in Canada IT Industry',
+                text: '10 Hottest Skills in Canada IT Industry',
                 fontSize: 16
             },
             legend: {

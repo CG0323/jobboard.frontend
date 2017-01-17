@@ -12,6 +12,12 @@ body {
     text-align: center;
 }
 
+.aligncenter { 
+clear: both; 
+display: block; 
+margin:auto; 
+} 
+
 @media (min-width: 1400px) {
     .container {
         width: 90%;
