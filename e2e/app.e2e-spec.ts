@@ -1,10 +1,10 @@
-import { FrontendPage } from './app.po';
+import { Jobboard.NewPage } from './app.po';
 
-describe('frontend App', function() {
-  let page: FrontendPage;
+describe('jobboard.new App', function() {
+  let page: Jobboard.NewPage;
 
   beforeEach(() => {
-    page = new FrontendPage();
+    page = new Jobboard.NewPage();
   });
 
   it('should display message saying app works', () => {
