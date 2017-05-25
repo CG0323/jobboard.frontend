@@ -16,7 +16,6 @@ import { ConfigService } from './shared/utils/config.service';
 import { ItemsService } from './shared/utils/items.service';
 import { InsightComponent } from './insight/insight.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
