@@ -1,81 +1,27 @@
-# jobboard.frontend
-Angular2 single page application, deployed on Nginx. Users can view the latest job opportunities in a "Car Comparison" way, quickly view the required competencies before openning the detailed job page. Skill columns are customizable. Users can also add/edit skill detecting rules. Some statistic features are also available.
+# Jobboard.New
 
-------
-## Table of contents
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-beta.31.
 
+## Development server
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-- [Source code structure](#source-code-structure)
-- [Implementation key points](#implementation-key-points)
-- [Deployment key points](#deployment-key-points)
+## Code scaffolding
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
 
+## Build
 
-## Source code structure
-```
-|-- jobboard.frontend
-    |-- angular-cli.json
-    |-- fabfile.py
-    |-- karma.conf.js
-    |-- package.json
-    |-- protractor.conf.js
-    |-- README.md
-    |-- tslint.json
-    |-- src
-        |-- favicon.ico
-        |-- index.html
-        |-- main.ts
-        |-- polyfills.ts
-        |-- styles.css
-        |-- test.ts
-        |-- tsconfig.json
-        |-- app
-        |   |-- app.component.css
-        |   |-- app.component.html
-        |   |-- app.component.spec.ts
-        |   |-- app.component.ts
-        |   |-- app.module.ts
-        |   |-- app.routes.ts
-        |   |-- rxjs-operators.ts
-        |   |-- home
-        |   |   |-- home.component.css
-        |   |   |-- home.component.html
-        |   |   |-- home.component.spec.ts
-        |   |   |-- home.component.ts
-        |   |-- insight
-        |   |   |-- insight.component.css
-        |   |   |-- insight.component.html
-        |   |   |-- insight.component.spec.ts
-        |   |   |-- insight.component.ts
-        |   |-- job
-        |   |   |-- job.component.css
-        |   |   |-- job.component.html
-        |   |   |-- job.component.spec.ts
-        |   |   |-- job.component.ts
-        |   |-- shared
-        |   |   |-- interfaces.ts
-        |   |   |-- services
-        |   |   |   |-- data.service.spec.ts
-        |   |   |   |-- data.service.ts
-        |   |   |-- utils
-        |   |       |-- config.service.ts
-        |   |       |-- items.service.ts
-        |   |-- skill
-        |       |-- skill.component.css
-        |       |-- skill.component.html
-        |       |-- skill.component.spec.ts
-        |       |-- skill.component.ts
-        |-- assets
-        |   |-- .gitkeep
-        |   |-- img
-        |       |-- system-design.png
-        |-- environments
-            |-- environment.prod.ts
-            |-- environment.ts
-```
-## Implementation key points
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Deployment key points
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Before running the tests make sure you are serving the app via `ng serve`.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

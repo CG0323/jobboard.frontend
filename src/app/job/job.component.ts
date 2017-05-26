@@ -9,7 +9,7 @@ import { LocalStorageService } from 'ng2-webstorage';
   templateUrl: './job.component.html',
 })
 export class JobComponent implements OnInit {
-  selectedSkills: string[] = [];
+  selectedSkills: ISkill[] = [];
   skills: ISkill[];
   jobs: IJob[];
   totalItems : number;
@@ -19,8 +19,7 @@ export class JobComponent implements OnInit {
   constructor(private dataService : DataService, private storage:LocalStorageService) {}
 
   ngOnInit() {
-    this.retrieveSetting();
-    this.pageSize = 15;
+    this.pageSize = 25;
     this.loadJobs(0, this.pageSize);
     this.loadSkills(0,10000);
   }
@@ -40,10 +39,20 @@ export class JobComponent implements OnInit {
         this.dataService.getSkills(offset, pageSize)
             .subscribe((res: PaginatedResult<ISkill[]>) => {
                 this.skills = res.result;
-                this.totalItems = res.pagination.TotalItems;
-            },
-            error => {
-
+                this.selectedSkills.push(this.skills.find(s=>s.name==="SQL"));
+                this.selectedSkills.push(this.skills.find(s=>s.name===".NET"));
+                this.selectedSkills.push(this.skills.find(s=>s.name==="JS"));
+                this.selectedSkills.push(this.skills.find(s=>s.name==="Git"));
+                this.selectedSkills.push(this.skills.find(s=>s.name==="Linux"));
+                this.selectedSkills.push(this.skills.find(s=>s.name==="Angularjs"));
+                this.selectedSkills.push(this.skills.find(s=>s.name==="Angular2"));
+                this.selectedSkills.push(this.skills.find(s=>s.name==="Nodejs"));
+                this.selectedSkills.push(this.skills.find(s=>s.name==="MongoDB"));
+                this.selectedSkills.push(this.skills.find(s=>s.name==="HTML"));
+                this.selectedSkills.push(this.skills.find(s=>s.name==="CSS"));
+                this.selectedSkills.push(this.skills.find(s=>s.name==="Python"));
+                this.selectedSkills.push(this.skills.find(s=>s.name==="Java"));
+                this.selectedSkills.push(this.skills.find(s=>s.name==="PHP"));
             });
     }
 
@@ -52,7 +61,7 @@ export class JobComponent implements OnInit {
     }
 
     getPostDate(i: number){
-        var magic:number = 15;
+        var magic:number = this.pageSize;
         i = i % magic
         if(this.jobs.length <= i){
 
@@ -64,7 +73,7 @@ export class JobComponent implements OnInit {
 
 
     getUrl(i: number){
-        var magic:number = 15;
+        var magic:number = this.pageSize;
         i = i % magic
         if(this.jobs.length <= i){
             return "";
@@ -73,7 +82,7 @@ export class JobComponent implements OnInit {
     }
 
     getTitle(i: number){
-        var magic:number = 15;
+        var magic:number = this.pageSize;
         i = i % magic
         if(this.jobs.length <= i){
             return "";
@@ -82,7 +91,7 @@ export class JobComponent implements OnInit {
     }
 
     getRequriedSkillLevel(i:number, skillId:number){
-        var magic:number = 15;
+        var magic:number = this.pageSize;
         i = i % magic
         if(this.jobs.length <= i){
             return 0;
@@ -98,7 +107,7 @@ export class JobComponent implements OnInit {
 
 
     showDetail(i: number) {
-        var magic:number = 15;
+        var magic:number = this.pageSize;
         i = i % magic;
         var id = this.jobs[i].id;
         this.dataService.getJobWithContent(id)
@@ -120,11 +129,7 @@ export class JobComponent implements OnInit {
          this.storage.store('selectedSkills', this.selectedSkills);
     }
 
-    retrieveSetting() {
-        // var storedSelection = this.storage.retrieve('selectedSkills');
-        // if(storedSelection){
-        //     this.selectedSkills = storedSelection;
-        // }
-    }
+
+    
 
 }
