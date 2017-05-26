@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ISkill} from '../shared/interfaces';
 import { DataService } from '../shared/services/data.service';
 import { Message,UIChart } from 'primeng/primeng';
+declare let chart:any
 @Component({
   selector: 'app-insight',
   templateUrl: './insight.component.html',
